@@ -42,6 +42,13 @@ R_50_NAS | No | 38.5 | 38.9 | [download](https://pan.baidu.com/s/1-eH5Rs0KKGpx7n
 R_101_NAS | Yes | 42.1 | 42.5 | [download](https://pan.baidu.com/s/1pRgVIsWtXdDea1EE23JGRg) | euuz
 R_101_X_32x8d_NAS | Yes | 43.4 | 43.7 | [download](https://pan.baidu.com/s/1tn6mfXKsaVH9-HBxQCNrTg) | 4cci
 
+**Attention:** If the above model link cannot be downloaded normally, please refer to the link below.
+[Mobile_NAS](https://mega.nz/#!Gu4DAS7K!Cp46jUVhOIvVhPUOtukrHKJfao_Pk5vAwaU_xz8haR0),
+[R_50_NAS](https://mega.nz/#!y34TGYbJ!Vv_k-GcGTW7A_F_Ov5f44PfzCfpK6oYrtS1ZIC9gFK8),
+[R_101_NAS](https://mega.nz/#!Xqx1TS7S!MPiiasknw6M2aJjdR6SkevFFadgmJW8_TOJig_naXnE),
+[R_101_X_32x8d_NAS](https://mega.nz/#!qqpRUCaI!tj24t4tLWF_Qn56ZvdTkdxWzoXcP1gFEwgk4OK__Shw)
+
+
 *All results are obtained with a single model and without any test time data augmentation such as multi-scale, flipping and etc..* 
 
 
