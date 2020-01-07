@@ -137,8 +137,16 @@ def build_decoder(cfg):
     # USE P5 to extract P6, P7 features
     top_blocks = LastLevelP6P7(cfg.SEARCH.DECODER.AGG_SIZE, cfg.SEARCH.DECODER.AGG_SIZE)
 
+    arch_info = cfg.SEARCH.DECODER.CONFIG
+    decoder_layer_num = cfg.SEARCH.DECODER.NUM_CELLS
+    if cfg.SEARCH.NAS_DECODER_ON and cfg.SEARCH.NAS_HEAD_ON:
+        sample_arch = arch_info[:decoder_layer_num]
+
+    elif cfg.SEARCH.NAS_DECODER_ON and (not cfg.SEARCH.NAS_HEAD_ON):
+        sample_arch = arch_info
+
     return Decoder(cfg.MODEL.BACKBONE.ENCODER_OUT_CHANNELS,
-                   cfg.SEARCH.DECODER.CONFIG,
+                   sample_arch,
                    agg_size=cfg.SEARCH.DECODER.AGG_SIZE,
                    repeats=cfg.SEARCH.DECODER.REPEATS,
                    top_blocks=top_blocks)

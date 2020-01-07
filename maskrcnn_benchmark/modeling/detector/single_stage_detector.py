@@ -12,6 +12,7 @@ from ..backbone.backbone import build_backbone
 from ..rpn.rpn import build_rpn
 from ..rpn.retinanet.retinanet import build_retinanet
 from ..rpn.densebox.densebox import build_densebox
+from ..rpn.nas_head.nas_head import build_nas_head
 from maskrcnn_benchmark.nas.modeling.micro_decoders import build_decoder
 
 
@@ -48,8 +49,12 @@ class SingleStageDetector(nn.Module):
             rpn = build_retinanet(cfg)
             self.rpn_name = 'retinanet'
         elif cfg.MODEL.DENSEBOX_ON:
-            rpn = build_densebox(cfg)
-            self.rpn_name = 'densebox'
+            if cfg.SEARCH.NAS_HEAD_ON:
+                rpn = build_nas_head(cfg)
+                self.rpn_name = 'nas_head'
+            else:
+                rpn = build_densebox(cfg)
+                self.rpn_name = 'densebox'
         else:
             rpn = build_rpn(cfg)
         fpn = build_decoder(cfg)

@@ -34,6 +34,22 @@ AGG_OPS = {
     }
 
 
+HEAD_OPS = {
+    'skip_connect': lambda C, stride, affine, repeats=1: Identity() if stride == 1 else GN_FactorizedReduce(C, C, affine=affine),
+    'sep_conv_3x3': lambda C, stride, affine, repeats=1: GN_SepConv(C, C, 3, stride, 1, affine=affine, repeats=repeats),
+    'conv1x1': lambda C, stride, affine, repeats=1: nn.Sequential(
+        conv1x1(C, C, stride=stride),
+        nn.GroupNorm(32, C),
+        nn.ReLU(inplace=False)),
+    'conv3x3': lambda C, stride, affine, repeats=1: nn.Sequential(
+        conv3x3(C, C, stride=stride),
+        nn.GroupNorm(32, C),
+        nn.ReLU(inplace=False)),
+    'sep_conv_3x3_dil3': lambda C, stride, affine, repeats=1: GN_SepConv(C, C, 3, stride, 3,
+            affine=affine, dilation=3, repeats=repeats),
+    'def_conv_3x3': lambda C, stride, affine, repeats=1: GN_DefConv(C, C, 3),
+    }
+
 def conv_bn(C_in, C_out, kernel_size, stride, padding, affine=True):
     return nn.Sequential(
         nn.Conv2d(C_in, C_out, kernel_size, stride=stride, padding=padding,
@@ -144,6 +160,27 @@ class SepConv(nn.Module):
         return self.op(x)
 
 
+class GN_SepConv(nn.Module):
+
+    def __init__(self, C_in, C_out, kernel_size, stride, padding, dilation=1, affine=True, repeats=1):
+        super(GN_SepConv, self).__init__()
+        if C_in != C_out:
+            assert repeats == 1, "SepConv with C_in != C_out must have only 1 repeat"
+        basic_op = lambda: nn.Sequential(
+            nn.Conv2d(C_in, C_in, kernel_size=kernel_size, stride=stride,
+                      padding=padding, dilation=dilation, groups=C_in, bias=False),
+            nn.Conv2d(C_in, C_out, kernel_size=1, padding=0, bias=False),
+            nn.GroupNorm(32, C_out),
+            nn.ReLU(inplace=True))
+        self.op = nn.Sequential()
+        for idx in range(repeats):
+            self.op.add_module('sep_{}'.format(idx),
+                basic_op())
+
+    def forward(self, x):
+        return self.op(x)
+
+
 class Identity(nn.Module):
 
     def __init__(self):
@@ -184,12 +221,43 @@ class FactorizedReduce(nn.Module):
         return out
 
 
+class GN_FactorizedReduce(nn.Module):
+
+    def __init__(self, C_in, C_out, affine=True):
+        super(GN_FactorizedReduce, self).__init__()
+        assert C_out % 2 == 0
+        self.relu = nn.ReLU(inplace=False)
+        self.conv_1 = nn.Conv2d(C_in, C_out // 2, 1, stride=2,
+                                padding=0, bias=False)
+        self.conv_2 = nn.Conv2d(C_in, C_out // 2, 1, stride=2,
+                                padding=0, bias=False)
+        self.gn = nn.GroupNorm(32, C_out)
+
+    def forward(self, x):
+        x = self.relu(x)
+        out = torch.cat([self.conv_1(x), self.conv_2(x[:, :, 1:, 1:])], dim=1)
+        out = self.gn(out)
+        return out
+
+
 class DefConv(nn.Module):
 
     def __init__(self, C_in, C_out, ksize):
         super(DefConv, self).__init__()
         self.dcn = nn.Sequential(DCN(C_in, C_out, ksize, stride=1, padding=ksize // 2, deformable_groups=2),
                                  nn.BatchNorm2d(C_out),
+                                 nn.ReLU(inplace=True))
+
+    def forward(self, x):
+        return self.dcn(x)
+
+
+class GN_DefConv(nn.Module):
+
+    def __init__(self, C_in, C_out, ksize):
+        super(GN_DefConv, self).__init__()
+        self.dcn = nn.Sequential(DCN(C_in, C_out, ksize, stride=1, padding=ksize // 2, deformable_groups=2),
+                                 nn.GroupNorm(32, C_out),
                                  nn.ReLU(inplace=True))
 
     def forward(self, x):
