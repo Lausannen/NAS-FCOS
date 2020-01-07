@@ -1,0 +1,50 @@
+MODEL:
+  META_ARCHITECTURE: "SingleStageDetector"
+  WEIGHT: "models/mbv2-NAS-head.pth"
+  RPN_ONLY: True
+  DENSEBOX_ON: True
+  BACKBONE:
+    CONV_BODY: "MobileNetV2"
+    OUT_CHANNELS: 256
+    ENCODER_OUT_CHANNELS: (24, 32, 96, 320)
+  RETINANET:
+    SCALES_PER_OCTAVE: 3
+    STRADDLE_THRESH: -1
+    NUM_CLASSES: 81
+    NMS_TH: 0.6
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  TEST: ("coco_2017_val",)
+INPUT:
+  MIN_SIZE_TRAIN: (800,)
+  MAX_SIZE_TRAIN: 1333
+  MIN_SIZE_TEST: 800
+  MAX_SIZE_TEST: 1333
+DATALOADER:
+  SIZE_DIVISIBILITY: 32
+  NUM_WORKERS: 2
+SEARCH:
+  NAS_DECODER_ON: True
+  NAS_HEAD_ON: True
+  DECODER:
+    VERSION: 2
+    CONFIG: [[[3, 3, 4, 4, 1]], [[3, 3, 4, 4, 1]], [[4, 3, 4, 3, 1]], [[1, 3, 4, 3, 1]], [[5, 3, 4, 4, 1]], [[4, 7, 4, 4, 1]], [[7, 2, 4, 4, 1]], [0], [5, 1, 5, 0, 4, 4]]
+    AGG_SIZE: 256
+    NUM_CELLS: 7
+    OP_SIZE: 7
+  HEAD:
+    NUM_HEAD_LAYERS: 6
+    OP_SIZE: 6
+    AGG_OP_SIZE: 2
+    OUTPUT_CONCAT: False
+    WEIGHT_SHARE_SEARCH: True
+SOLVER:
+  BASE_LR: 0.01
+  WEIGHT_DECAY: 0.0001
+  STEPS: (60000,80000,)
+  MAX_ITER: 90000
+  IMS_PER_BATCH: 16
+  NUM_GPUS: 4
+TEST:
+  IMS_PER_BATCH: 8
+OUTPUT_DIR: 'output/coco/mobile-NAS_head'
