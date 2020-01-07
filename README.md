@@ -8,6 +8,8 @@ This project hosts the inference code and model for implementing the NAS-FCOS al
 
 The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv.org/abs/1906.04423). 
 
+## Updates
+* Update NAS head module, config files and pretrained model links. (07/01/2020)
 
 ## Required hardware
 We use 4 Nvidia V100 GPUs. 
@@ -38,14 +40,20 @@ For your convenience, we provide the following trained models (more models are c
 Model | Multi-scale training | AP (minival) | AP (test-dev) | Link | Fetch Code
 --- |:---:|:---:|:--:|:---:|:---:|
 Mobile_NAS | No | 32.6 | 33.1 | [download](https://pan.baidu.com/s/1wx1qeiIVo64d51zyiJAauQ) | 3dm9 
+Mobile_NAS_head | No | 34.4 | 34.7 | [download](https://mega.nz/#!ruIzSSxR!NIQEk-PG-aPYdSryRpSscE3pD81YJysVs6z1-o48-V0) | -
 R_50_NAS | No | 38.5 | 38.9 | [download](https://pan.baidu.com/s/1-eH5Rs0KKGpx7nQa22vJOA) |f88u
+R_50_NAS_head | No | 39.5 | 39.8 | [download](https://mega.nz/#!H7g0TQ6R!VL9jEjviVMSuPoOYeZceS8usnoy3bulZDrHc0QDIO6A) | -
 R_101_NAS | Yes | 42.1 | 42.5 | [download](https://pan.baidu.com/s/1pRgVIsWtXdDea1EE23JGRg) | euuz
+R_101_NAS_head | Yes | 42.8 | 43.0 | [download](https://mega.nz/#!uiJj3ICR!NdU3VaBtsdySFS0QezVpiV8Yz4h4CaqG63ST357860E) | -
 R_101_X_32x8d_NAS | Yes | 43.4 | 43.7 | [download](https://pan.baidu.com/s/1tn6mfXKsaVH9-HBxQCNrTg) | 4cci
 
 **Attention:** If the above model link cannot be downloaded normally, please refer to the link below.
 [Mobile_NAS](https://mega.nz/#!Gu4DAS7K!Cp46jUVhOIvVhPUOtukrHKJfao_Pk5vAwaU_xz8haR0),
+[Mobile_NAS_head](https://mega.nz/#!ruIzSSxR!NIQEk-PG-aPYdSryRpSscE3pD81YJysVs6z1-o48-V0),
 [R_50_NAS](https://mega.nz/#!y34TGYbJ!Vv_k-GcGTW7A_F_Ov5f44PfzCfpK6oYrtS1ZIC9gFK8),
+[R_50_NAS_head](https://mega.nz/#!H7g0TQ6R!VL9jEjviVMSuPoOYeZceS8usnoy3bulZDrHc0QDIO6A),
 [R_101_NAS](https://mega.nz/#!Xqx1TS7S!MPiiasknw6M2aJjdR6SkevFFadgmJW8_TOJig_naXnE),
+[R_101_NAS_head](https://mega.nz/#!uiJj3ICR!NdU3VaBtsdySFS0QezVpiV8Yz4h4CaqG63ST357860E)
 [R_101_X_32x8d_NAS](https://mega.nz/#!qqpRUCaI!tj24t4tLWF_Qn56ZvdTkdxWzoXcP1gFEwgk4OK__Shw)
 
 
