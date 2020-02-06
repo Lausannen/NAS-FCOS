@@ -9,6 +9,7 @@ This project hosts the inference code and model for implementing the NAS-FCOS al
 The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv.org/abs/1906.04423). 
 
 ## Updates
+* Upload solver module to support self training. (06/02/2020)
 * Support RetinaNet detector in NAS module. (06/02/2020)
 * Update NAS head module, config files and pretrained model links. (07/01/2020)
 
@@ -23,6 +24,13 @@ This NAS-FCOS implementation is based on [maskrcnn-benchmark](https://github.com
 Please check [INSTALL.md](INSTALL.md) for installation instructions.
 You may also want to see the original [README.md](MASKRCNN_README.md) of maskrcnn-benchmark.
 
+## Train
+The train command line on coco train:
+
+    python -m torch.distributed.launch \
+        --nproc_per_node=4 \
+        --master_port=1213 \
+        tools/train_net.py --config-file "configs/search/R_50_NAS_retinanet.yaml"
 
 ## Inference
 The inference command line on coco minival split:

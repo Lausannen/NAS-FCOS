@@ -32,8 +32,8 @@ class BatchCollator(object):
                 self.anchor_generator = make_anchor_generator_retinanet(cfg)
                 self.box_coder = BoxCoder(weights=(10., 10., 5., 5.))
                 self.matcher = Matcher(
-                    cfg.MODEL.RPN.FG_IOU_THRESHOLD,
-                    cfg.MODEL.RPN.BG_IOU_THRESHOLD,
+                    cfg.MODEL.RETINANET.FG_IOU_THRESHOLD,
+                    cfg.MODEL.RETINANET.BG_IOU_THRESHOLD,
                     allow_low_quality_matches=True
                 )
                 self.loss_evaluator = RetinaNetLossComputation(
