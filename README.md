@@ -1,6 +1,6 @@
 # NAS-FCOS: Fast Neural Architecture Search for Object Detection
 
-This project hosts the inference code and model for implementing the NAS-FCOS algorithm for object detection, as presented in our paper:
+This project hosts the train and inference code with pretrained model for implementing the NAS-FCOS algorithm for object detection, as presented in our paper:
 
     NAS-FCOS: Fast Neural Architecture Search for Object Detection;
     Ning Wang, Yang Gao, Hao Chen, Peng Wang, Zhi Tian, Chunhua Shen;
@@ -10,7 +10,7 @@ The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv
 
 ## Updates
 * Upload solver module to support self training. (06/02/2020)
-* Support RetinaNet detector in NAS module. (06/02/2020)
+* Support RetinaNet detector in NAS module (pretrained model coming soon). (06/02/2020)
 * Update NAS head module, config files and pretrained model links. (07/01/2020)
 
 ## Required hardware
