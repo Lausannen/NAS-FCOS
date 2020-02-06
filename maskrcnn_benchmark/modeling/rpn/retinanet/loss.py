@@ -166,8 +166,8 @@ class RetinaNetLossComputation(object):
 
 def make_retinanet_loss_evaluator(cfg, box_coder):
     matcher = Matcher(
-        cfg.MODEL.RPN.FG_IOU_THRESHOLD,
-        cfg.MODEL.RPN.BG_IOU_THRESHOLD,
+        cfg.MODEL.RETINANET.FG_IOU_THRESHOLD,
+        cfg.MODEL.RETINANET.BG_IOU_THRESHOLD,
         allow_low_quality_matches=True,
     )
 

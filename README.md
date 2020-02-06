@@ -9,6 +9,7 @@ This project hosts the inference code and model for implementing the NAS-FCOS al
 The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv.org/abs/1906.04423). 
 
 ## Updates
+* Support RetinaNet detector in NAS module. (06/02/2020)
 * Update NAS head module, config files and pretrained model links. (07/01/2020)
 
 ## Required hardware
