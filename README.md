@@ -9,6 +9,7 @@ This project hosts the train and inference code with pretrained model for implem
 The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv.org/abs/1906.04423). 
 
 ## Updates
+* News: Accepted by CVPR 2020. (24/02/2020)
 * Upload solver module to support self training. (06/02/2020)
 * Support RetinaNet detector in NAS module (pretrained model coming soon). (06/02/2020)
 * Update NAS head module, config files and pretrained model links. (07/01/2020)
