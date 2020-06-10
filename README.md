@@ -4,9 +4,9 @@ This project hosts the train and inference code with pretrained model for implem
 
     NAS-FCOS: Fast Neural Architecture Search for Object Detection;
     Ning Wang, Yang Gao, Hao Chen, Peng Wang, Zhi Tian, Chunhua Shen;
-    arXiv preprint arXiv:1906.04423 (2019).
+    In: Proc. IEEE Conf. Computer Vision and Pattern Recognition (CVPR), 2020.
 
-The full paper is available at: [https://arxiv.org/abs/1906.04423](https://arxiv.org/abs/1906.04423). 
+The full paper is available at: [NAS-FCOS Paper](http://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_NAS-FCOS_Fast_Neural_Architecture_Search_for_Object_Detection_CVPR_2020_paper.pdf). 
 
 ## Updates
 * News: Accepted by CVPR 2020. (24/02/2020)
@@ -77,11 +77,12 @@ Any pull requests or issues are welcome.
 ## Citations
 Please consider citing our paper in your publications if the project helps your research. BibTeX reference is as follows.
 ```
-@article{wang2019nasfcos,
-  title   =  {{NAS-FCOS}: Fast Neural Architecture Search for Object Detection},
-  author  =  {Wang, Ning and Gao, Yang and Chen, Hao and Wang, Peng and Tian, Zhi and Shen, Chunhua},
-  journal =  {arXiv preprint arXiv:1906.04423},
-  year    =  {2019}
+@InProceedings{Wang_2020_CVPR,
+    author = {Wang, Ning and Gao, Yang and Chen, Hao and Wang, Peng and Tian, Zhi and Shen, Chunhua and Zhang, Yanning},
+    title = {NAS-FCOS: Fast Neural Architecture Search for Object Detection},
+    booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month = {June},
+    year = {2020}
 }
 ```
 
